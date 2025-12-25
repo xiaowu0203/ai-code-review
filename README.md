@@ -87,6 +87,13 @@ npm run dev
 
 ---
 
+## 项目页面
+<img width="2559" height="1347" alt="d2d3f188fc63bdf2ea1919964c2651ae" src="https://github.com/user-attachments/assets/d6b0b061-5158-4910-a5bd-028174e68739" />
+<img width="2559" height="1347" alt="6256105ed8594dc1bfb82447c571a856" src="https://github.com/user-attachments/assets/6839d366-cc92-40b1-8218-28b7720eeaf6" />
+<img width="2559" height="1347" alt="930d6b7e8b08f2cdc0b39152b26859c2" src="https://github.com/user-attachments/assets/77a0c20e-fa75-41c4-a64f-b6b85ee4294e" />
+
+
+---
 ## 部署指南
 
 ### 配置 AI 模型
