@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ai.codereview.mapper.CodeReviewMapper">
+
+    <!-- 获取项目审核排行 -->
+    <select id="getProjectRanking" resultType="map">
+        SELECT
+            pr.project_id,
+            p.project_name,
+            COUNT(*) AS review_count
+        FROM code_review cr
+        INNER JOIN pull_request pr ON cr.pr_id = pr.id
+        INNER JOIN project p ON pr.project_id = p.id
+        WHERE p.deleted = 0
+        GROUP BY pr.project_id, p.project_name
+        ORDER BY review_count DESC
+        LIMIT 10
+    </select>
+
+    <!-- 获取审核历史（带PR信息） -->
+    <select id="getReviewHistoryWithPR" resultType="map">
+        SELECT
+            cr.id,
+            cr.pr_id,
+            cr.review_type,
+            cr.ai_model,
+            cr.status,
+            cr.trigger_time,
+            cr.complete_time,
+            pr.pr_title,
+            pr.author,
+            pr.source_branch,
+            pr.target_branch,
+            pr.project_id,
+            p.project_name
+        FROM code_review cr
+        INNER JOIN pull_request pr ON cr.pr_id = pr.id
+        INNER JOIN project p ON pr.project_id = p.id
+        WHERE 1=1
+        <if test="projectId != null">
+            AND pr.project_id = #{projectId}
+        </if>
+        <if test="prId != null">
+            AND pr.id = #{prId}
+        </if>
+        ORDER BY cr.create_time DESC
+    </select>
+
+</mapper>
